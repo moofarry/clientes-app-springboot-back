@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -22,27 +23,26 @@ import lombok.Data;
 @Table(name="clientes")
 public class Cliente implements Serializable{
 
-	
-
 	@Id
 	@GeneratedValue(generator = "SEC_CLIENTES", strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(name = "SEC_CLIENTES", sequenceName = "SECQ_CLIENTES",allocationSize=1)
 	@Column(unique=true, nullable=false)
-	private Long id;
-	
-	@Column
-	private String nombre;
-	@Column
-	private String apellido;
-	@Column
+	private Long id;	
+
+	private String nombre;	
+	private String apellido;	
 	private String email;
 	
 	@Column(name="create_at")	
 	@Temporal(TemporalType.DATE)
 	private Date createAt;	
-
-
-
+	
+	@PrePersist
+	public void rePersist() {
+		createAt = new Date();
+	}
+	
 	private static final long serialVersionUID = 1L;
+	
 	
 }

@@ -11,7 +11,10 @@ import com.moofarrif.springboot.backend.apirest.models.entity.Cliente;
 
 public interface IClienteService {
 	
+	public Cliente findById(Long id);
 	public List<Cliente> findAll();	
-	public Cliente guardarCliente(Cliente cliente);
+	public Cliente save(Cliente cliente);
+	
+	public void delete(Long id);
 
 }
