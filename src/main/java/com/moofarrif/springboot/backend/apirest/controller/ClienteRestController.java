@@ -21,7 +21,7 @@ import com.moofarrif.springboot.backend.apirest.models.entity.Cliente;
 import com.moofarrif.springboot.backend.apirest.models.services.IClienteService;
 
 
-@CrossOrigin(origins = {"http://localhost:4200"})
+@CrossOrigin(origins = {"http://localhost:41629"})
 @RestController
 @RequestMapping("/api")
 public class ClienteRestController {
@@ -31,7 +31,7 @@ public class ClienteRestController {
 	
 	@GetMapping("/clientes")
 	public List<Cliente> index(){
-		return clienteService.findAll();
+		return clienteService.findAllByOrderByIdAsc();
 	}
 	
 	@GetMapping("/clientes/{id}")
@@ -42,8 +42,7 @@ public class ClienteRestController {
 	@PostMapping("/clientes")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public Cliente create(@RequestBody Cliente cliente) { //transforma json y lo mapea obj cliente		
-		return clienteService.save(cliente);
-		
+		return clienteService.save(cliente);		
 	}
 	
 	@PutMapping("/clientes/{id}")
