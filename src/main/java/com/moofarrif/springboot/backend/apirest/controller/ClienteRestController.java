@@ -1,13 +1,19 @@
 package com.moofarrif.springboot.backend.apirest.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +23,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import com.moofarrif.springboot.backend.apirest.models.entity.Cliente;
 import com.moofarrif.springboot.backend.apirest.models.services.IClienteService;
@@ -55,9 +62,21 @@ public class ClienteRestController {
 	}
 
 	@PostMapping("/clientes")
-	public ResponseEntity<?> create(@RequestBody Cliente cliente) { // transforma json y lo mapea obj cliente
+	public ResponseEntity<?> create(@Valid @RequestBody Cliente cliente, BindingResult result) { // transforma json y lo
+																																																// mapea obj cliente
 		Cliente clienteNew = null;
 		Map<String, Object> resMap = new HashMap<>();
+
+		if (result.hasErrors()) {
+			// Recibo un file error lista -> stream-> operador en map a String empleando
+			// expresion lambda-> collet
+
+			List<String> errors = result.getFieldErrors().stream()
+					.map(err -> "El campo: " + err.getField() + " " + err.getDefaultMessage()).collect(Collectors.toList());
+			resMap.put("errors", errors);
+			return new ResponseEntity<Map<String, Object>>(resMap, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
 
 		try {
 			clienteNew = clienteService.save(cliente);
@@ -80,8 +99,9 @@ public class ClienteRestController {
 
 		Map<String, Object> resMap = new HashMap<>();
 
-		if(clienteActual== null){
-			resMap.put("mensaje", "Error: No se pudo editar, el cliente ID: ".concat(id.toString().concat(" no existe en la base de datos")));
+		if (clienteActual == null) {
+			resMap.put("mensaje",
+					"Error: No se pudo editar, el cliente ID: ".concat(id.toString().concat(" no existe en la base de datos")));
 			return new ResponseEntity<Map<String, Object>>(resMap, HttpStatus.NOT_FOUND);
 		}
 
@@ -111,7 +131,7 @@ public class ClienteRestController {
 
 		try {
 			clienteService.delete(id); // springData por crudRepository calida que el cliente exista mediante el id
-			
+
 		} catch (DataAccessException e) {
 			resMap.put("mensaje", "Error al eliminar el cliente en la base de datos");
 			resMap.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
@@ -119,7 +139,8 @@ public class ClienteRestController {
 		}
 		resMap.put("mensaje", "El cliente eliminado con éxito!");
 
-		return new ResponseEntity<Map<String, Object>>(resMap, HttpStatus.OK);// springData por crudRepository calida que el cliente exista mediante el id
+		return new ResponseEntity<Map<String, Object>>(resMap, HttpStatus.OK);// springData por crudRepository calida que el
+																																					// cliente exista mediante el id
 
 	}
 

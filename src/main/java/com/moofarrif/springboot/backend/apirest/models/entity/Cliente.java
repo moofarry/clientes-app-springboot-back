@@ -32,15 +32,15 @@ public class Cliente implements Serializable{
 	@Column(unique=true, nullable=false)
 	private Long id;	
 	
-	@NotEmpty
-	@Size(min = 4,max = 12)
+	@NotEmpty @Size(min = 4,max = 12) 
 	@Column(nullable = false)
 	private String nombre;	
+
 	@NotEmpty
 	@Column(nullable = false)
 	private String apellido;	
-	@NotEmpty
-	@Email
+	
+	@NotEmpty @Email
 	@Column(unique=true ,nullable = false )
 	private String email;
 	
