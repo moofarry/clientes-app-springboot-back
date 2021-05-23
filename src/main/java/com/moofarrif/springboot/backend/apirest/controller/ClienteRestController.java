@@ -74,7 +74,7 @@ public class ClienteRestController {
 			List<String> errors = result.getFieldErrors().stream()
 					.map(err -> "El campo: " + err.getField() + " " + err.getDefaultMessage()).collect(Collectors.toList());
 			resMap.put("errors", errors);
-			return new ResponseEntity<Map<String, Object>>(resMap, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<Map<String, Object>>(resMap, HttpStatus.BAD_REQUEST);
 		}
 
 
