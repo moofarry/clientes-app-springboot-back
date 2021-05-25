@@ -1,0 +1,12 @@
+INSERT INTO "CLIENTES" (NOMBRE, APELLIDO, EMAIL, CREATE_AT) VALUES('Andrés', 'Guzmán', 'profesor@bolsadeideas.com', TO_DATE('2018-01-01', 'yyyy-mm-dd'));
+INSERT INTO "CLIENTES" (NOMBRE, APELLIDO, EMAIL, CREATE_AT) VALUES('Mr. John', 'Doe', 'john.doe@gmail.com', TO_DATE('2018-01-02', 'yyyy-mm-dd'));
+INSERT INTO "CLIENTES" (NOMBRE, APELLIDO, EMAIL, CREATE_AT) VALUES('Linus', 'Torvalds', 'linus.torvalds@gmail.com', TO_DATE('2018-01-03', 'yyyy-mm-dd'));
+INSERT INTO "CLIENTES" (NOMBRE, APELLIDO, EMAIL, CREATE_AT) VALUES('Rasmus', 'Lerdorf', 'rasmus.lerdorf@gmail.com', TO_DATE('2018-01-04', 'yyyy-mm-dd'));
+INSERT INTO "CLIENTES" (NOMBRE, APELLIDO, EMAIL, CREATE_AT) VALUES('Erich', 'Gamma', 'erich.gamma@gmail.com', TO_DATE('2018-02-01', 'yyyy-mm-dd'));
+INSERT INTO "CLIENTES" (NOMBRE, APELLIDO, EMAIL, CREATE_AT) VALUES('Richard', 'Helm', 'richard.helm@gmail.com', TO_DATE('2018-02-10', 'yyyy-mm-dd'));
+INSERT INTO "CLIENTES" (NOMBRE, APELLIDO, EMAIL, CREATE_AT) VALUES('Ralph', 'Johnson', 'ralph.johnson@gmail.com', TO_DATE('2018-02-18', 'yyyy-mm-dd'));
+INSERT INTO "CLIENTES" (NOMBRE, APELLIDO, EMAIL, CREATE_AT) VALUES('John', 'Vlissides', 'john.vlissides@gmail.com', TO_DATE('2018-02-28', 'yyyy-mm-dd'));
+INSERT INTO "CLIENTES" (NOMBRE, APELLIDO, EMAIL, CREATE_AT) VALUES('Dr. James', 'Gosling', 'james.gosling@gmail.com', TO_DATE('2018-03-03', 'yyyy-mm-dd'));
+INSERT INTO "CLIENTES" (NOMBRE, APELLIDO, EMAIL, CREATE_AT) VALUES('Magma', 'Lee', 'magma.lee@gmail.com', TO_DATE('2018-03-04', 'yyyy-mm-dd'));
+INSERT INTO "CLIENTES" (NOMBRE, APELLIDO, EMAIL, CREATE_AT) VALUES('Tornado', 'Roe', 'tornado.roe@gmail.com', TO_DATE('2018-03-05', 'yyyy-mm-dd'));
+INSERT INTO "CLIENTES" (NOMBRE, APELLIDO, EMAIL, CREATE_AT) VALUES('Jade', 'Doe', 'jane.doe@gmail.com', TO_DATE('2018-03-06', 'yyyy-mm-dd'));
