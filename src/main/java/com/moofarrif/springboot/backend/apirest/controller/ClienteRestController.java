@@ -1,6 +1,5 @@
 package com.moofarrif.springboot.backend.apirest.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +12,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.moofarrif.springboot.backend.apirest.models.entity.Cliente;
-import com.moofarrif.springboot.backend.apirest.models.services.IClienteService;
+import com.moofarrif.springboot.backend.apirest.services.IClienteService;
 
 
 @CrossOrigin(origins = { "http://localhost:4200" })
@@ -98,7 +96,6 @@ public class ClienteRestController {
 	public ResponseEntity<?> update(@Valid @RequestBody Cliente cliente, BindingResult result, @PathVariable Long id) {
 
 		Cliente clienteActual = clienteService.findById(id);
-
 		Cliente clienteUpdated = null;
 
 		Map<String, Object> response = new HashMap<>();

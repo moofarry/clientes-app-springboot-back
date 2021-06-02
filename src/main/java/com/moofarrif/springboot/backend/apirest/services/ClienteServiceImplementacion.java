@@ -1,4 +1,4 @@
-package com.moofarrif.springboot.backend.apirest.models.services;
+package com.moofarrif.springboot.backend.apirest.services;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.moofarrif.springboot.backend.apirest.models.dao.IClientesDao;
 import com.moofarrif.springboot.backend.apirest.models.entity.Cliente;
+import com.moofarrif.springboot.backend.apirest.models.entity.dao.IClientesDao;
 
 @Component
 public class ClienteServiceImplementacion implements IClienteService {

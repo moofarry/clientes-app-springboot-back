@@ -1,4 +1,4 @@
-package com.moofarrif.springboot.backend.apirest.models.dao;
+package com.moofarrif.springboot.backend.apirest.models.entity.dao;
 
 import java.util.List;
 

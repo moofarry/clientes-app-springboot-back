@@ -1,4 +1,4 @@
-package com.moofarrif.springboot.backend.apirest.models.services;
+package com.moofarrif.springboot.backend.apirest.services;
 
 import java.util.List;
 
