@@ -27,8 +27,6 @@ public class Cliente implements Serializable{
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
-	//@GeneratedValue(generator = "SEC_CLIENTES", strategy = GenerationType.SEQUENCE)
-	//@SequenceGenerator(name = "SEC_CLIENTES", sequenceName = "SECQ_CLIENTES",allocationSize=1)
 	@Column(unique=true, nullable=false)
 	private Long id;
 	

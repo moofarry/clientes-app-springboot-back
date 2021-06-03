@@ -1,4 +1,4 @@
-package com.moofarrif.springboot.backend.apirest.models.entity.dao;
+package com.moofarrif.springboot.backend.apirest.dao;
 
 import java.util.List;
 
@@ -10,7 +10,6 @@ import com.moofarrif.springboot.backend.apirest.models.entity.Cliente;
 @Repository
 public interface IClientesDao  extends CrudRepository<Cliente, Long>{
 
-	List<Cliente> findAllByOrderByIdAsc();	
-	
+	List<Cliente> findAllByOrderByIdAsc();
 
 }

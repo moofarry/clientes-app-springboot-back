@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.moofarrif.springboot.backend.apirest.models.entity.Cliente;
-import com.moofarrif.springboot.backend.apirest.services.IClienteService;
+import com.moofarrif.springboot.backend.apirest.models.services.IClienteService;
 
 
 @CrossOrigin(origins = { "http://localhost:4200" })
@@ -63,39 +63,40 @@ public class ClienteRestController {
 	}
 	
 	@PostMapping("/clientes")
-	public ResponseEntity<?> create(@Valid @RequestBody Cliente cliente, BindingResult result) { // transforma json y lo
-																																																// mapea obj cliente
+	public ResponseEntity<?> create(@Valid @RequestBody Cliente cliente, BindingResult result) {
+		
 		Cliente clienteNew = null;
-		Map<String, Object> resMap = new HashMap<>();
+		Map<String, Object> response = new HashMap<>();
+		
+		if(result.hasErrors()) {
 
-		if (result.hasErrors()) {
-			// Recibo un file error lista -> stream-> operador en map a String empleando
-			// expresion lambda-> collet
-
-			List<String> errors = result.getFieldErrors().stream()
-					.map(err -> "El campo: " + err.getField() + " " + err.getDefaultMessage()).collect(Collectors.toList());
-			resMap.put("errors", errors);
-			return new ResponseEntity<Map<String, Object>>(resMap, HttpStatus.BAD_REQUEST);
+			List<String> errors = result.getFieldErrors()
+					.stream()
+					.map(err -> "El campo '" + err.getField() +"' "+ err.getDefaultMessage())
+					.collect(Collectors.toList());
+			
+			response.put("errors", errors);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 		}
-
-
+		
 		try {
 			clienteNew = clienteService.save(cliente);
-		} catch (DataAccessException e) {
-			resMap.put("mensaje", "Error al realizar el INSERT en la base de datos");
-			resMap.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-			return new ResponseEntity<Map<String, Object>>(resMap, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar el insert en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
-		resMap.put("mensaje", "El cliente ha sido creado con éxito!");
-		resMap.put("cliente", clienteNew);
-		return new ResponseEntity<Map<String, Object>>(resMap, HttpStatus.CREATED);
+		
+		response.put("mensaje", "El cliente ha sido creado con éxito!");
+		response.put("cliente", clienteNew);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
-
+	
 	@PutMapping("/clientes/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Cliente cliente, BindingResult result, @PathVariable Long id) {
 
 		Cliente clienteActual = clienteService.findById(id);
+
 		Cliente clienteUpdated = null;
 
 		Map<String, Object> response = new HashMap<>();
